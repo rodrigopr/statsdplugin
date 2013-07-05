@@ -62,8 +62,8 @@ var flush_stats = function graphite_flush(ts, metrics) {
     var value = counters[key];
     var valuePerSecond = value / (flushInterval / 1000); // calculate "per second" rate
 
-    statString += 'stats.'        + key + ' ' + valuePerSecond + ' ' + ts + "\n";
-    statString += 'stats_counts.' + key + ' ' + value          + ' ' + ts + "\n";
+    statString += 'rate.'        + key + ' ' + valuePerSecond + ' ' + ts + "\n";
+    statString += 'counters.' + key + ' ' + value          + ' ' + ts + "\n";
 
     numStats += 1;
   }
@@ -101,19 +101,19 @@ var flush_stats = function graphite_flush(ts, metrics) {
 
         var clean_pct = '' + pct;
         clean_pct.replace('.', '_');
-        message += 'stats.timers.' + key + '.mean_'  + clean_pct + ' ' + mean           + ' ' + ts + "\n";
-        message += 'stats.timers.' + key + '.upper_' + clean_pct + ' ' + maxAtThreshold + ' ' + ts + "\n";
-        message += 'stats.timers.' + key + '.sum_' + clean_pct + ' ' + sum + ' ' + ts + "\n";
+        //message += 'timers.' + key + '.mean_'  + clean_pct + ' ' + mean           + ' ' + ts + "\n";
+        //message += 'timers.' + key + '.upper_' + clean_pct + ' ' + maxAtThreshold + ' ' + ts + "\n";
+        //message += 'timers.' + key + '.sum_' + clean_pct + ' ' + sum + ' ' + ts + "\n";
       }
 
       sum = cumulativeValues[count-1];
       mean = sum / count;
 
-      message += 'stats.timers.' + key + '.upper ' + max   + ' ' + ts + "\n";
-      message += 'stats.timers.' + key + '.lower ' + min   + ' ' + ts + "\n";
-      message += 'stats.timers.' + key + '.count ' + count + ' ' + ts + "\n";
-      message += 'stats.timers.' + key + '.sum ' + sum  + ' ' + ts + "\n";
-      message += 'stats.timers.' + key + '.mean ' + mean + ' ' + ts + "\n";
+      //message += 'timers.' + key + '.upper ' + max   + ' ' + ts + "\n";
+      //message += 'timers.' + key + '.lower ' + min   + ' ' + ts + "\n";
+      message += 'timers.' + key + '.count ' + count + ' ' + ts + "\n";
+      message += 'timers.' + key + '.sum ' + sum  + ' ' + ts + "\n";
+      message += 'timers.' + key + '.mean ' + mean + ' ' + ts + "\n";
       statString += message;
 
       numStats += 1;
@@ -121,7 +121,7 @@ var flush_stats = function graphite_flush(ts, metrics) {
   }
 
   for (key in gauges) {
-    statString += 'stats.gauges.' + key + ' ' + gauges[key] + ' ' + ts + "\n";
+    statString += 'gauges.' + key + ' ' + gauges[key] + ' ' + ts + "\n";
     numStats += 1;
   }
 
