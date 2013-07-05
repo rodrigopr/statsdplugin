@@ -27,8 +27,8 @@ var post_stats = function graphite_post_stats(statString) {
     port: 80,
     path: '/api/v1/sink',
     method: 'POST',
-    auth: APIKey,
-    headers: {'Content-Length': statString.length}
+    //auth: APIKey,
+    headers: {'Content-Length': statString.length, 'Authorization': 'Basic ' + new Buffer(APIKey).toString('base64')}
   };
   
   var req = http.request(options, function(res) {
