@@ -62,7 +62,7 @@ var flush_stats = function graphite_flush(ts, metrics) {
     var value = counters[key];
     var valuePerSecond = value / (flushInterval / 1000); // calculate "per second" rate
 
-    statString += 'rate.'        + key + ' ' + valuePerSecond + ' ' + ts + "\n";
+    //statString += 'rate.'        + key + ' ' + valuePerSecond + ' ' + ts + "\n";
     statString += 'counters.' + key + ' ' + value          + ' ' + ts + "\n";
 
     numStats += 1;
